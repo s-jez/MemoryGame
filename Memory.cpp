@@ -13,11 +13,14 @@ namespace MemoryGame
 {
 	Memory::Memory(int rows, int cols) : rows(rows), cols(cols)
 	{
-		createCards();
+		if ((rows * cols) % 2 != 0) {
+			throw std::invalid_argument("Size of the board must be even.");
+		}
 		isStarted = false;
 		isProcessingClick = false;
 		firstSelectedCardIndex = -1;
 		secondSelectedCardIndex = -1;
+		createCards();
 	}
 	bool Memory::getIsStarted() 
 	{
@@ -27,26 +30,32 @@ namespace MemoryGame
 	{
 		this->isStarted = isStarted;
 	}
-	std::string Memory::getCardPath(int index)
+	std::string Memory::getCardValue(int index)
 	{
-		return cards[index].getImagePath();
+		return cards[index].getValue();
 	}
 	bool Memory::CheckForMatch(int index1, int index2)
 	{
-		return cards[index1].getImagePath() == cards[index2].getImagePath();
+		return cards[index1].getValue() == cards[index2].getValue();
 	}
 	void Memory::createCards()
 	{
-		cards.clear();
 		for (int i = 1; i <= (rows * cols) / 2; i++) {
-			string cardPath = "images/card" + to_string(i) + ".png";
-			if (fs::exists(cardPath)) {
-				cards.push_back(Card(cardPath));
-				cards.push_back(Card(cardPath));
+			cards.push_back(Card(to_string(i)));
+			cards.push_back(Card(to_string(i)));
+		}
+		shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
+
+		board.resize(rows, std::vector<Card>(cols, Card("")));
+		int index = 0;
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0 ; j < cols; j++) 
+			{
+				board[i][j] = cards[index];
+				index++;
 			}
 		}
-		if (cards.size() < rows * cols) return; // check if enough images in the images folder
-		shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()())); // shuffle cards
 	}
 	bool Memory::getProcessingClick()
 	{

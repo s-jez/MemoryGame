@@ -9,10 +9,14 @@ namespace MemoryGame
 	class Card 
 	{
 		public:
-			Card(std::string imagePath);
-			std::string getImagePath();
+			Card(std::string value);
+			std::string getValue();
+			bool isRevelead();
+			void reveal();
+			void hide();
 		private:
-			std::string imagePath;
+			std::string value;
+			bool isRevealed;
 	};
 }
 #endif

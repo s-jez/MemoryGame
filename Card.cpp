@@ -1,12 +1,25 @@
 #include "Card.h"
 
 namespace MemoryGame {
-	Card::Card(std::string imagePath)
+	Card::Card(std::string value)
 	{
-		this->imagePath = imagePath;
+		this->value = value;
+		isRevealed = false;
 	}
-	std::string Card::getImagePath()
+	std::string Card::getValue()
 	{
-		return imagePath;
+		return value;
+	}
+	bool Card::isRevelead()
+	{
+		return isRevealed;
+	}
+	void Card::reveal()
+	{
+		isRevealed = true;
+	}
+	void Card::hide()
+	{
+		isRevealed = false;
 	}
 }

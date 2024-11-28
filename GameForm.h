@@ -29,21 +29,23 @@ namespace MemoryGame {
 		array<PictureBox^>^ cardPictureBoxes;
 
 
-
 	private: System::Windows::Forms::Label^ playerTimeLabel;
 
 
 	private: System::Windows::Forms::Timer^ gameTimer;
+	private: System::Windows::Forms::ToolStripMenuItem^ aboutGameToolStripMenuItem;
 
 
 	private: System::Windows::Forms::Panel^ panel1;
 
 	public:
-		GameForm(Player *player)
+		GameForm(String^ playerName)
 		{
 			InitializeComponent();
 			initializeBoard();
-			playerNameLbl->Text = gcnew String(player->getPlayerName().c_str());
+			player->setPlayerName(marshal_as<std::string>(playerName));
+			String^ playerNameLbl = gcnew String(player->getPlayerName().c_str());
+			label1->Text = playerNameLbl;
 		}
 
 	protected:
@@ -95,6 +97,7 @@ namespace MemoryGame {
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->playerTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->gameTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -109,7 +112,10 @@ namespace MemoryGame {
 			// 
 			// appToolStripMenuItem
 			// 
-			this->appToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->closeToolStripMenuItem });
+			this->appToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->aboutGameToolStripMenuItem,
+					this->closeToolStripMenuItem
+			});
 			this->appToolStripMenuItem->Name = L"appToolStripMenuItem";
 			this->appToolStripMenuItem->Size = System::Drawing::Size(50, 20);
 			this->appToolStripMenuItem->Text = L"Game";
@@ -117,7 +123,7 @@ namespace MemoryGame {
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(103, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::closeToolStripMenuItem_Click);
 			// 
@@ -168,6 +174,12 @@ namespace MemoryGame {
 			this->gameTimer->Enabled = true;
 			this->gameTimer->Interval = 1000;
 			this->gameTimer->Tick += gcnew System::EventHandler(this, &GameForm::GameTimer);
+			// 
+			// aboutGameToolStripMenuItem
+			// 
+			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->aboutGameToolStripMenuItem->Text = L"About game";
 			// 
 			// GameForm
 			// 
@@ -220,7 +232,7 @@ namespace MemoryGame {
 				pictureBox->Cursor = Cursors::Hand;
 				pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
 				pictureBox->Tag = indexCard;
-				std::string cardPath = memoryGame->getCardPath(indexCard);
+				std::string cardPath = "images/card" + memoryGame->getCardValue(indexCard) + ".png";
 				pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
 				pictureBox->Click += gcnew EventHandler(this, &GameForm::Card_Click);
 				this->panel1->Controls->Add(pictureBox);
@@ -229,7 +241,6 @@ namespace MemoryGame {
 			}
 		}
 		Task::Delay(5000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::CoverAllCards));
-		memoryGame->setIsStarted(true);
 		gameTimer->Start();
 	}
 	void Card_Click(System::Object^ sender, System::EventArgs^ e) 
@@ -242,7 +253,7 @@ namespace MemoryGame {
 
 		if (pictureBox->Image == nullptr) 
 		{
-			std::string cardPath = memoryGame->getCardPath(index);
+			std::string cardPath = "images/card" + memoryGame->getCardValue(index) + ".png";
 			pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
 
 			int firstSelectedIndex = memoryGame->getFirstSelectedCardIndex();
@@ -304,9 +315,11 @@ namespace MemoryGame {
 			pictureBox->Image = nullptr;
 			pictureBox->BackColor = Color::LightBlue;
 		}
+		memoryGame->setIsStarted(true);
 	}
 	private: System::Void GameTimer(System::Object^ sender, System::EventArgs^ e) 
 	{
+		if (memoryGame->getIsStarted() == false) return;
 		player->setPlayerTime(player->getPlayerTime() + 1);
 		playerTimeLabel->Text = "Your time: " + formatTimeForLabel(player->getPlayerTime());
 	}

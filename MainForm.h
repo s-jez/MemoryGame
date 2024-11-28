@@ -16,13 +16,10 @@ namespace MemoryGame {
 	/// </summary>
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
-	private:
-		Player* player;
 	public:
 		MainForm(void)
 		{
 			InitializeComponent();
-			player = new Player();
 		}
 
 	protected:
@@ -45,6 +42,7 @@ namespace MemoryGame {
 	private: System::Windows::Forms::TextBox^ playerBox;
 
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::ToolStripMenuItem^ aboutGameToolStripMenuItem;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -74,6 +72,7 @@ namespace MemoryGame {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->playerBox = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -88,7 +87,10 @@ namespace MemoryGame {
 			// 
 			// optionsToolStripMenuItem
 			// 
-			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->closeToolStripMenuItem });
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+				this->aboutGameToolStripMenuItem,
+					this->closeToolStripMenuItem
+			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
 			this->optionsToolStripMenuItem->Size = System::Drawing::Size(50, 20);
 			this->optionsToolStripMenuItem->Text = L"Game";
@@ -96,7 +98,7 @@ namespace MemoryGame {
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(103, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::closeToolStripMenuItem_Click);
 			// 
@@ -155,6 +157,12 @@ namespace MemoryGame {
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Player Name";
 			// 
+			// aboutGameToolStripMenuItem
+			// 
+			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->aboutGameToolStripMenuItem->Text = L"About game";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -204,11 +212,9 @@ namespace MemoryGame {
 			playerBox->Text = "";
 			return;
 		}
-		std::string playerName = marshal_as<std::string>(playerBox->Text);
-		player->setPlayerName(playerName);
-		playerBox->Text = "";
-		GameForm^ gameForm = gcnew GameForm(player);
+		GameForm^ gameForm = gcnew GameForm(playerBox->Text);
 		gameForm->Show();
+		playerBox->Text = "";
 	}
 	};
 }

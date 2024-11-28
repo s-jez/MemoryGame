@@ -12,10 +12,9 @@ namespace MemoryGame
 	{
 		public:
 			Memory(int rows, int cols);
+			std::vector<std::vector<Card>> board;
 			int rows, cols;
-
-			std::vector<Card> cards;
-			std::string getCardPath(int index);
+			std::string getCardValue(int index);
 			bool CheckForMatch(int index1, int index2);
 
 			void setIsStarted(bool isStarted);
@@ -30,6 +29,7 @@ namespace MemoryGame
 			int getSecondSelectedCardIndex();
 			void resetSelectedCardsIndexes();
 		private:
+			std::vector<Card> cards;
 			void createCards();
 			int isStarted, firstSelectedCardIndex, secondSelectedCardIndex;
 			bool isProcessingClick;

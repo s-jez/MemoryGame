@@ -15,24 +15,29 @@ namespace MemoryGame
 			std::vector<std::vector<Card>> board;
 			int rows, cols;
 			std::string getCardValue(int index);
-			bool CheckForMatch(int index1, int index2);
-
-			void setIsStarted(bool isStarted);
+			bool CheckForMatch(int row1, int col1, int row2, int col2);
 			bool getIsStarted();
+			void setIsStarted(bool isStarted);
 
-			void setProcessingClick(bool isProcessingClick);
 			bool getProcessingClick();
+			void setProcessingClick(bool isProcessingClick);
 
-			void setFirstSelectedCardIndex(int index);
-			int getFirstSelectedCardIndex();
-			void setSecondSelectedCardIndex(int index);
-			int getSecondSelectedCardIndex();
-			void resetSelectedCardsIndexes();
+			int getFirstSelectedCardRow();
+			int getFirstSelectedCardCol();
+			void setFirstSelectedCardRow(int row);
+			void setFirstSelectedCardCol(int col);
+
+			int getSecondSelectedCardRow();
+			int getSecondSelectedCardCol();
+			void setSecondSelectedCardRow(int row);
+			void setSecondSelectedCardCol(int col);
+
+			void resetSelectedCards();
 		private:
 			std::vector<Card> cards;
-			void createCards();
-			int isStarted, firstSelectedCardIndex, secondSelectedCardIndex;
+			int isStarted, firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
 			bool isProcessingClick;
+			void createCards();
 	};
 }
 #endif

@@ -18,8 +18,8 @@ namespace MemoryGame
 		}
 		isStarted = false;
 		isProcessingClick = false;
-		firstSelectedCardIndex = -1;
-		secondSelectedCardIndex = -1;
+		firstSelectedCardRow = -1;
+		firstSelectedCardCol = -1;
 		createCards();
 	}
 	bool Memory::getIsStarted() 
@@ -34,9 +34,13 @@ namespace MemoryGame
 	{
 		return cards[index].getValue();
 	}
-	bool Memory::CheckForMatch(int index1, int index2)
+	bool Memory::CheckForMatch(int row1, int col1, int row2, int col2)
 	{
-		return cards[index1].getValue() == cards[index2].getValue();
+		if (board[row1][col1].isRevelead() == board[row2][col2].isRevelead())
+		{
+			return board[row1][col1].getValue() == board[row2][col2].getValue();
+		}
+		return false;
 	}
 	void Memory::createCards()
 	{
@@ -57,6 +61,43 @@ namespace MemoryGame
 			}
 		}
 	}
+	int Memory::getFirstSelectedCardRow()
+	{
+		return firstSelectedCardRow;
+	}
+	void Memory::setFirstSelectedCardRow(int row)
+	{
+		this->firstSelectedCardRow = row;
+	}
+	int Memory::getFirstSelectedCardCol()
+	{
+		return firstSelectedCardCol;
+	}
+	void Memory::setFirstSelectedCardCol(int col)
+	{
+		this->firstSelectedCardCol = col;
+	}
+	void Memory::setSecondSelectedCardRow(int row)
+	{
+		this->secondSelectedCardRow = row;
+	}
+	int Memory::getSecondSelectedCardRow()
+	{
+		return secondSelectedCardRow;
+	}
+	void Memory::setSecondSelectedCardCol(int col)
+	{
+		this->secondSelectedCardCol = col;
+	}
+	int Memory::getSecondSelectedCardCol()
+	{
+		return secondSelectedCardCol;
+	}
+	void Memory::resetSelectedCards()
+	{
+		firstSelectedCardRow = -1;
+		firstSelectedCardCol = -1;
+	}
 	bool Memory::getProcessingClick()
 	{
 		return isProcessingClick;
@@ -64,27 +105,6 @@ namespace MemoryGame
 	void Memory::setProcessingClick(bool isProcessingClick)
 	{
 		this->isProcessingClick = isProcessingClick;
-	}
-	int Memory::getFirstSelectedCardIndex()
-	{
-		return firstSelectedCardIndex;
-	}
-	void Memory::setFirstSelectedCardIndex(int index)
-	{
-		this->firstSelectedCardIndex = index;
-	}
-	int Memory::getSecondSelectedCardIndex()
-	{
-		return secondSelectedCardIndex;
-	}
-	void Memory::setSecondSelectedCardIndex(int index)
-	{
-		this->secondSelectedCardIndex = index;
-	}
-	void Memory::resetSelectedCardsIndexes()
-	{
-		this->firstSelectedCardIndex = -1;
-		this->secondSelectedCardIndex = -1;
 	}
 }
 

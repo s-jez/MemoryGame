@@ -26,7 +26,7 @@ namespace MemoryGame {
 	private:
 		Memory* memoryGame = new Memory(4, 4);
 		Player* player = new Player();
-		array<PictureBox^>^ cardPictureBoxes;
+		array<PictureBox^, 2>^ pictureBoxBoard;
 
 
 	private: System::Windows::Forms::Label^ playerTimeLabel;
@@ -91,13 +91,13 @@ namespace MemoryGame {
 			this->components = (gcnew System::ComponentModel::Container());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->appToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->closeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->playerNameLbl = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->playerTimeLabel = (gcnew System::Windows::Forms::Label());
 			this->gameTimer = (gcnew System::Windows::Forms::Timer(this->components));
-			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -120,10 +120,16 @@ namespace MemoryGame {
 			this->appToolStripMenuItem->Size = System::Drawing::Size(50, 20);
 			this->appToolStripMenuItem->Text = L"Game";
 			// 
+			// aboutGameToolStripMenuItem
+			// 
+			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->aboutGameToolStripMenuItem->Text = L"About game";
+			// 
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::closeToolStripMenuItem_Click);
 			// 
@@ -175,12 +181,6 @@ namespace MemoryGame {
 			this->gameTimer->Interval = 1000;
 			this->gameTimer->Tick += gcnew System::EventHandler(this, &GameForm::GameTimer);
 			// 
-			// aboutGameToolStripMenuItem
-			// 
-			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
-			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->aboutGameToolStripMenuItem->Text = L"About game";
-			// 
 			// GameForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -204,9 +204,9 @@ namespace MemoryGame {
 
 		}
 #pragma endregion
-	private: System::Void GameForm_Load(System::Object^ sender, System::EventArgs^ e) 
-	{
-	}
+    private: System::Void GameForm_Load(System::Object^ sender, System::EventArgs^ e) 
+    {
+    }
 	private: System::Void closeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
 		Application::Exit();
@@ -216,7 +216,7 @@ namespace MemoryGame {
 	}
 	private: void initializeBoard() 
 	{
-		cardPictureBoxes = gcnew array<PictureBox^>(memoryGame->rows * memoryGame->cols);
+		pictureBoxBoard = gcnew array<PictureBox^, 2>(memoryGame->rows, memoryGame->cols);
 		int indexCard = 0;
 		int pbWidth = 120, pbHeight = 140, pbPadding = 10;
 
@@ -231,91 +231,119 @@ namespace MemoryGame {
 				pictureBox->BackColor = Color::LightBlue;
 				pictureBox->Cursor = Cursors::Hand;
 				pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
-				pictureBox->Tag = indexCard;
 				std::string cardPath = "images/card" + memoryGame->getCardValue(indexCard) + ".png";
 				pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
 				pictureBox->Click += gcnew EventHandler(this, &GameForm::Card_Click);
 				this->panel1->Controls->Add(pictureBox);
-				cardPictureBoxes[indexCard] = pictureBox;
+				pictureBoxBoard[row, col] = pictureBox;
 				indexCard++;
 			}
 		}
 		Task::Delay(5000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::CoverAllCards));
 		gameTimer->Start();
 	}
-	void Card_Click(System::Object^ sender, System::EventArgs^ e) 
+	void Card_Click(System::Object^ sender, System::EventArgs^ e)
 	{
 		if (memoryGame->getProcessingClick() == true) return;
 		if (memoryGame->getIsStarted() == false) return;
 
-		PictureBox^ pictureBox = safe_cast<PictureBox^>(sender);
-		int index = (int)pictureBox->Tag;
-
-		if (pictureBox->Image == nullptr) 
+		PictureBox^ clickedPictureBox = dynamic_cast<PictureBox^>(sender);
+		for (int i = 0; i < pictureBoxBoard->GetLength(0); i++)
 		{
-			std::string cardPath = "images/card" + memoryGame->getCardValue(index) + ".png";
-			pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
-
-			int firstSelectedIndex = memoryGame->getFirstSelectedCardIndex();
-			if (firstSelectedIndex == -1) 
+			for (int j = 0; j < pictureBoxBoard->GetLength(1); j++) 
 			{
-				memoryGame->setFirstSelectedCardIndex(index);
-			}
-			else 
-			{
-				memoryGame->setSecondSelectedCardIndex(index);
-				memoryGame->setProcessingClick(true);
-				Task::Delay(1000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::OnCoverCards));
+				if (pictureBoxBoard[i, j] == clickedPictureBox)
+				{
+					if (memoryGame->board[i][j].isRevelead() == false) 
+					{
+						memoryGame->board[i][j].reveal();
+						ShowPictureBox(i, j);
+						bool firstCardSelected = memoryGame->getFirstSelectedCardRow() == -1 && memoryGame->getFirstSelectedCardCol() == -1;
+						if (firstCardSelected)
+						{
+							memoryGame->setFirstSelectedCardRow(i);
+							memoryGame->setFirstSelectedCardCol(j);
+						}
+						else
+						{
+							memoryGame->setProcessingClick(true);
+							memoryGame->setSecondSelectedCardRow(i);
+							memoryGame->setSecondSelectedCardCol(j);
+							Task::Delay(1000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::HandleSecondCard));
+						}
+					}
+					return;
+				}
 			}
 		}
 	}
-	private: System::Void OnCoverCards(Task^ t)
+	void ShowPictureBox(int row, int col) 
 	{
-		int firstSelectedIndex = memoryGame->getFirstSelectedCardIndex();
-		int secondSelectedIndex = memoryGame->getSecondSelectedCardIndex();
-
-		bool isMatched = memoryGame->CheckForMatch(firstSelectedIndex, secondSelectedIndex);
-		// hide matched cards
-		if (isMatched) 
+		String^ cardValue = gcnew String(memoryGame->board[row][col].getValue().c_str());
+		if (memoryGame->board[row][col].isRevelead() == true)
 		{
-			cardPictureBoxes[firstSelectedIndex]->Visible = false;
-			cardPictureBoxes[secondSelectedIndex]->Visible = false;
-			// check if all cards are matched
-			bool isAllMatched = true;
-			for each (PictureBox ^ pictureBox in cardPictureBoxes) 
+			pictureBoxBoard[row, col]->Image = Image::FromFile("images/card" + cardValue + ".png");
+		}
+		else
+		{
+			pictureBoxBoard[row, col]->Image = nullptr;
+		}
+	}
+	void HandleSecondCard(Task ^t)
+	{
+		int firstSelectedRow = memoryGame->getFirstSelectedCardRow();
+		int firstSelectedCol = memoryGame->getFirstSelectedCardCol();
+		int secondSelectedRow = memoryGame->getSecondSelectedCardRow();
+		int secondSelectedCol = memoryGame->getSecondSelectedCardCol();
+
+		bool isMatched = memoryGame->CheckForMatch(firstSelectedRow, firstSelectedCol, secondSelectedRow, secondSelectedCol);
+		if (isMatched)
+		{
+			pictureBoxBoard[firstSelectedRow, firstSelectedCol]->Visible = false;
+			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->Visible = false;	
+
+			// check if the game has ended
+			bool gameEnd = true;
+			for (int i = 0; i < memoryGame->rows; i++)
 			{
-				if (pictureBox->Visible == true) 
+				for (int j = 0; j < memoryGame->cols; j++)
 				{
-					isAllMatched = false;
-					break;
+					if (memoryGame->board[i][j].isRevelead() == false)
+					{
+						gameEnd = false;
+						break;
+					}
 				}
 			}
-			if (isAllMatched) 
+			if (gameEnd)
 			{
 				gameTimer->Stop();
-				MessageBox::Show("Congratulations, Your time: " + formatTimeForLabel(player->getPlayerTime()) + "!", "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show("Congratulations! You have won the game in " + formatTimeForLabel(player->getPlayerTime()));
 				this->Close();
 			}
 		}
-		// cover unmatched cards
-		if (secondSelectedIndex != -1 && !isMatched)
+		else
 		{
-			cardPictureBoxes[firstSelectedIndex]->Image = nullptr;
-			cardPictureBoxes[firstSelectedIndex]->BackColor = Color::LightBlue;
-			cardPictureBoxes[secondSelectedIndex]->Image = nullptr;
-			cardPictureBoxes[secondSelectedIndex]->BackColor = Color::LightBlue;
+			pictureBoxBoard[firstSelectedRow, firstSelectedCol]->Image = nullptr;
+			pictureBoxBoard[firstSelectedRow, firstSelectedCol]->BackColor = Color::LightBlue;
+			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->Image = nullptr;
+			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->BackColor = Color::LightBlue;
+			memoryGame->board[firstSelectedRow][firstSelectedCol].hide();
+			memoryGame->board[secondSelectedRow][secondSelectedCol].hide();
 		}
-		// reset selected cards and processing click
-		memoryGame->resetSelectedCardsIndexes();
+		memoryGame->resetSelectedCards();
 		memoryGame->setProcessingClick(false);
 	}
 	void CoverAllCards(Task^ t) 
 	{
-		for each (PictureBox ^ pictureBox in cardPictureBoxes) {
+		for each (PictureBox ^ pictureBox in pictureBoxBoard) {
 			pictureBox->Image = nullptr;
 			pictureBox->BackColor = Color::LightBlue;
 		}
 		memoryGame->setIsStarted(true);
+	}
+	void Test(Task^ t)
+	{
 	}
 	private: System::Void GameTimer(System::Object^ sender, System::EventArgs^ e) 
 	{

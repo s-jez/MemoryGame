@@ -1,13 +1,9 @@
-#include "Memory.h"
-#include "Card.h"
 #include <iostream>
 #include <algorithm>
 #include <random>
 #include <string>
-#include <filesystem>
-
-using namespace std;
-namespace fs = std::filesystem;
+#include "Memory.h"
+#include "Card.h"
 
 namespace MemoryGame
 {
@@ -20,7 +16,7 @@ namespace MemoryGame
 		isProcessingClick = false;
 		firstSelectedCardRow = -1;
 		firstSelectedCardCol = -1;
-		createCards();
+		createBoardWithCards();
 	}
 	bool Memory::getIsStarted() 
 	{
@@ -30,9 +26,9 @@ namespace MemoryGame
 	{
 		this->isStarted = isStarted;
 	}
-	std::string Memory::getCardValue(int index)
+	std::string Memory::getCardValue(int row, int col)
 	{
-		return cards[index].getValue();
+		return board[row][col].getValue();
 	}
 	bool Memory::CheckForMatch(int row1, int col1, int row2, int col2)
 	{
@@ -42,11 +38,11 @@ namespace MemoryGame
 		}
 		return false;
 	}
-	void Memory::createCards()
+	void Memory::createBoardWithCards()
 	{
 		for (int i = 1; i <= (rows * cols) / 2; i++) {
-			cards.push_back(Card(to_string(i)));
-			cards.push_back(Card(to_string(i)));
+			cards.push_back(Card(std::to_string(i)));
+			cards.push_back(Card(std::to_string(i)));
 		}
 		shuffle(cards.begin(), cards.end(), std::mt19937(std::random_device()()));
 
@@ -60,6 +56,20 @@ namespace MemoryGame
 				index++;
 			}
 		}
+	}
+	bool Memory::checkForEnd()
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				if (board[i][j].isRevelead() == false)
+				{
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	int Memory::getFirstSelectedCardRow()
 	{
@@ -93,11 +103,6 @@ namespace MemoryGame
 	{
 		return secondSelectedCardCol;
 	}
-	void Memory::resetSelectedCards()
-	{
-		firstSelectedCardRow = -1;
-		firstSelectedCardCol = -1;
-	}
 	bool Memory::getProcessingClick()
 	{
 		return isProcessingClick;
@@ -105,6 +110,11 @@ namespace MemoryGame
 	void Memory::setProcessingClick(bool isProcessingClick)
 	{
 		this->isProcessingClick = isProcessingClick;
+	}
+	void Memory::resetSelectedCards()
+	{
+		firstSelectedCardRow = -1;
+		firstSelectedCardCol = -1;
 	}
 }
 

@@ -12,12 +12,13 @@ namespace MemoryGame
 	{
 		public:
 			Memory(int rows, int cols);
-			std::vector<std::vector<Card>> board;
 			int rows, cols;
-			std::string getCardValue(int index);
+			std::vector<std::vector<Card>> board;
+			std::string getCardValue(int row, int col);
 			bool CheckForMatch(int row1, int col1, int row2, int col2);
 			bool getIsStarted();
 			void setIsStarted(bool isStarted);
+			bool checkForEnd();
 
 			bool getProcessingClick();
 			void setProcessingClick(bool isProcessingClick);
@@ -31,13 +32,12 @@ namespace MemoryGame
 			int getSecondSelectedCardCol();
 			void setSecondSelectedCardRow(int row);
 			void setSecondSelectedCardCol(int col);
-
 			void resetSelectedCards();
 		private:
 			std::vector<Card> cards;
 			int isStarted, firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
 			bool isProcessingClick;
-			void createCards();
+			void createBoardWithCards();
 	};
 }
 #endif

@@ -217,9 +217,7 @@ namespace MemoryGame {
 	private: void initializeBoard() 
 	{
 		pictureBoxBoard = gcnew array<PictureBox^, 2>(memoryGame->rows, memoryGame->cols);
-		int indexCard = 0;
 		int pbWidth = 120, pbHeight = 140, pbPadding = 10;
-
 		for (int row = 0; row < memoryGame->rows; row++) 
 		{
 			for (int col = 0; col < memoryGame->cols; col++) 
@@ -231,12 +229,11 @@ namespace MemoryGame {
 				pictureBox->BackColor = Color::LightBlue;
 				pictureBox->Cursor = Cursors::Hand;
 				pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
-				std::string cardPath = "images/card" + memoryGame->getCardValue(indexCard) + ".png";
+				std::string cardPath = "images/card" + memoryGame->getCardValue(row, col) + ".png";
 				pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
 				pictureBox->Click += gcnew EventHandler(this, &GameForm::Card_Click);
 				this->panel1->Controls->Add(pictureBox);
 				pictureBoxBoard[row, col] = pictureBox;
-				indexCard++;
 			}
 		}
 		Task::Delay(5000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::CoverAllCards));
@@ -301,24 +298,10 @@ namespace MemoryGame {
 		{
 			pictureBoxBoard[firstSelectedRow, firstSelectedCol]->Visible = false;
 			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->Visible = false;	
-
-			// check if the game has ended
-			bool gameEnd = true;
-			for (int i = 0; i < memoryGame->rows; i++)
-			{
-				for (int j = 0; j < memoryGame->cols; j++)
-				{
-					if (memoryGame->board[i][j].isRevelead() == false)
-					{
-						gameEnd = false;
-						break;
-					}
-				}
-			}
-			if (gameEnd)
+			if (memoryGame->checkForEnd())
 			{
 				gameTimer->Stop();
-				MessageBox::Show("Congratulations! You have won the game in " + formatTimeForLabel(player->getPlayerTime()));
+				MessageBox::Show("Congratulations! You have won the game in " + gcnew String(player->getPlayerTime().c_str()));
 				this->Close();
 			}
 		}
@@ -334,27 +317,23 @@ namespace MemoryGame {
 		memoryGame->resetSelectedCards();
 		memoryGame->setProcessingClick(false);
 	}
-	void CoverAllCards(Task^ t) 
+	void CoverAllCards(Task^ t)
 	{
-		for each (PictureBox ^ pictureBox in pictureBoxBoard) {
-			pictureBox->Image = nullptr;
-			pictureBox->BackColor = Color::LightBlue;
+		for (int i = 0; i < memoryGame->rows; i++)
+		{
+			for (int j = 0; j < memoryGame->cols; j++)
+			{
+				pictureBoxBoard[i, j]->Image = nullptr;
+				pictureBoxBoard[i, j]->BackColor = Color::LightBlue;
+			}
 		}
 		memoryGame->setIsStarted(true);
-	}
-	void Test(Task^ t)
-	{
 	}
 	private: System::Void GameTimer(System::Object^ sender, System::EventArgs^ e) 
 	{
 		if (memoryGame->getIsStarted() == false) return;
-		player->setPlayerTime(player->getPlayerTime() + 1);
-		playerTimeLabel->Text = "Your time: " + formatTimeForLabel(player->getPlayerTime());
-	}
-	// format time as mm:ss
-	String^ formatTimeForLabel(int seconds) 
-	{
-		return String::Format("{0}:{1:D2}", seconds / 60, seconds % 60);
+		player->incrementTime();
+		playerTimeLabel->Text = "Your time: " + gcnew String(player->getPlayerTime().c_str());
 	}
 };
 }

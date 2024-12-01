@@ -1,6 +1,7 @@
 #include "Card.h"
 
-namespace MemoryGame {
+namespace MemoryGame 
+{
 	Card::Card(std::string value)
 	{
 		this->value = value;

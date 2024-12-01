@@ -2,6 +2,7 @@
 
 #include "Memory.h"
 #include "Player.h"
+#include "HighScore.h"
 #include "AboutForm.h"
 #include <random>
 #include <msclr/marshal_cppstd.h>
@@ -27,6 +28,7 @@ namespace MemoryGame {
 	private:
 		Memory* memoryGame = new Memory(4, 4);
 		Player* player = new Player();
+		HighScore* highScore = new HighScore();
 		array<PictureBox^, 2>^ pictureBoxBoard;
 
 
@@ -304,6 +306,7 @@ namespace MemoryGame {
 			{
 				gameTimer->Stop();
 				MessageBox::Show("You have won the game in " + gcnew String(player->getPlayerTime().c_str()), "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				highScore->saveHighScore(player);
 				this->Close();
 			}
 		}

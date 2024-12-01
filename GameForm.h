@@ -2,6 +2,7 @@
 
 #include "Memory.h"
 #include "Player.h"
+#include "AboutForm.h"
 #include <random>
 #include <msclr/marshal_cppstd.h>
 #include <map>
@@ -123,13 +124,14 @@ namespace MemoryGame {
 			// aboutGameToolStripMenuItem
 			// 
 			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
-			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->aboutGameToolStripMenuItem->Text = L"About game";
+			this->aboutGameToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::aboutGameToolStripMenuItem_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &GameForm::closeToolStripMenuItem_Click);
 			// 
@@ -206,7 +208,7 @@ namespace MemoryGame {
 #pragma endregion
     private: System::Void GameForm_Load(System::Object^ sender, System::EventArgs^ e) 
     {
-    }
+     }
 	private: System::Void closeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
 		Application::Exit();
@@ -301,7 +303,7 @@ namespace MemoryGame {
 			if (memoryGame->checkForEnd())
 			{
 				gameTimer->Stop();
-				MessageBox::Show("Congratulations! You have won the game in " + gcnew String(player->getPlayerTime().c_str()));
+				MessageBox::Show("You have won the game in " + gcnew String(player->getPlayerTime().c_str()), "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				this->Close();
 			}
 		}
@@ -334,6 +336,10 @@ namespace MemoryGame {
 		if (memoryGame->getIsStarted() == false) return;
 		player->incrementTime();
 		playerTimeLabel->Text = "Your time: " + gcnew String(player->getPlayerTime().c_str());
+	}
+	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AboutForm^ aboutForm = gcnew AboutForm();
+		aboutForm->Show();
 	}
 };
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "GameForm.h"
+#include "AboutForm.h"
 
 namespace MemoryGame {
 
@@ -67,12 +68,12 @@ namespace MemoryGame {
 		{
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->closeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->playerBox = (gcnew System::Windows::Forms::TextBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -94,6 +95,13 @@ namespace MemoryGame {
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
 			this->optionsToolStripMenuItem->Size = System::Drawing::Size(50, 20);
 			this->optionsToolStripMenuItem->Text = L"Game";
+			// 
+			// aboutGameToolStripMenuItem
+			// 
+			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->aboutGameToolStripMenuItem->Text = L"About game";
+			this->aboutGameToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::aboutGameToolStripMenuItem_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
@@ -157,12 +165,6 @@ namespace MemoryGame {
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Player Name";
 			// 
-			// aboutGameToolStripMenuItem
-			// 
-			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
-			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->aboutGameToolStripMenuItem->Text = L"About game";
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -216,5 +218,9 @@ namespace MemoryGame {
 		gameForm->Show();
 		playerBox->Text = "";
 	}
-	};
+	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		AboutForm^ aboutForm = gcnew AboutForm();
+		aboutForm->Show();
+	}
+};
 }

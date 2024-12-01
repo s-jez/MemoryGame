@@ -2,30 +2,30 @@
 
 namespace MemoryGame 
 {
-	MemoryGame::Player::Player()
+	Player::Player()
 	{
 		playerTime = 0;
 		playerName = "";
 	}
-	std::string MemoryGame::Player::getPlayerTime()
+	std::string Player::getPlayerTime()
 	{
 		int minutes = playerTime / 60;
 		int seconds = playerTime % 60;
 		return std::to_string(minutes) + ":" + (seconds < 10 ? "0" : "") + std::to_string(seconds);
 	}
-	void MemoryGame::Player::setPlayerTime(int time)
+	void Player::setPlayerTime(int time)
 	{
 		this->playerTime = time;
 	}
-	void MemoryGame::Player::incrementTime()
+	void Player::incrementTime()
 	{
 		playerTime++;
 	}
-	std::string MemoryGame::Player::getPlayerName()
+	std::string Player::getPlayerName()
 	{
 		return playerName;
 	}
-	void MemoryGame::Player::setPlayerName(std::string pName)
+	void Player::setPlayerName(std::string pName)
 	{
 		this->playerName = pName;
 	}

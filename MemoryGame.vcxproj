@@ -121,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AboutForm.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="GameForm.cpp" />
     <ClCompile Include="main.cpp" />
@@ -129,6 +130,9 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AboutForm.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Card.h" />
     <ClInclude Include="GameForm.h">
       <FileType>CppForm</FileType>
@@ -140,6 +144,9 @@
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.h</DependentUpon>
     </EmbeddedResource>

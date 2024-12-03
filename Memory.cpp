@@ -107,9 +107,9 @@ namespace MemoryGame
 	{
 		return isProcessingClick;
 	}
-	void Memory::setProcessingClick(bool isProcessingClick)
+	void Memory::setProcessingClick(bool isProc)
 	{
-		this->isProcessingClick = isProcessingClick;
+		this->isProcessingClick = isProc;
 	}
 	void Memory::resetSelectedCards()
 	{

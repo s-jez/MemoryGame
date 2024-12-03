@@ -11,7 +11,9 @@ namespace MemoryGame
 			Player();
 			std::string getPlayerName();
 			void setPlayerName(std::string pName);
-			std::string getPlayerTime();
+			std::string getPlayerFormattedTime();
+			int convertTimeToSeconds(std::string fTime);
+			int getPlayerTime();
 			void setPlayerTime(int time);
 			void incrementTime();
 		private:

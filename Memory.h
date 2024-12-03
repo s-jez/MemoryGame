@@ -14,14 +14,14 @@ namespace MemoryGame
 			Memory(int rows, int cols);
 			int rows, cols;
 			std::vector<std::vector<Card>> board;
+
 			std::string getCardValue(int row, int col);
 			bool CheckForMatch(int row1, int col1, int row2, int col2);
 			bool getIsStarted();
 			void setIsStarted(bool isStarted);
 			bool checkForEnd();
-
 			bool getProcessingClick();
-			void setProcessingClick(bool isProcessingClick);
+			void setProcessingClick(bool isProc);
 
 			int getFirstSelectedCardRow();
 			int getFirstSelectedCardCol();
@@ -35,8 +35,8 @@ namespace MemoryGame
 			void resetSelectedCards();
 		private:
 			std::vector<Card> cards;
-			int isStarted, firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
-			bool isProcessingClick;
+			int firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
+			bool isProcessingClick, isStarted;
 			void createBoardWithCards();
 	};
 }

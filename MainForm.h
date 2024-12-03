@@ -1,6 +1,7 @@
 #pragma once
 #include "GameForm.h"
 #include "AboutForm.h"
+#include "HighScoreForm.h"
 
 namespace MemoryGame {
 
@@ -44,6 +45,7 @@ namespace MemoryGame {
 
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutGameToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^ highScoreToolStripMenuItem;
 
 	private: System::ComponentModel::IContainer^ components;
 
@@ -66,9 +68,11 @@ namespace MemoryGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(MainForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->optionsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->aboutGameToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->highScoreToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->closeToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
@@ -88,9 +92,9 @@ namespace MemoryGame {
 			// 
 			// optionsToolStripMenuItem
 			// 
-			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->optionsToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->aboutGameToolStripMenuItem,
-					this->closeToolStripMenuItem
+					this->highScoreToolStripMenuItem, this->closeToolStripMenuItem
 			});
 			this->optionsToolStripMenuItem->Name = L"optionsToolStripMenuItem";
 			this->optionsToolStripMenuItem->Size = System::Drawing::Size(50, 20);
@@ -99,14 +103,21 @@ namespace MemoryGame {
 			// aboutGameToolStripMenuItem
 			// 
 			this->aboutGameToolStripMenuItem->Name = L"aboutGameToolStripMenuItem";
-			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->aboutGameToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->aboutGameToolStripMenuItem->Text = L"About game";
 			this->aboutGameToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::aboutGameToolStripMenuItem_Click);
+			// 
+			// highScoreToolStripMenuItem
+			// 
+			this->highScoreToolStripMenuItem->Name = L"highScoreToolStripMenuItem";
+			this->highScoreToolStripMenuItem->Size = System::Drawing::Size(140, 22);
+			this->highScoreToolStripMenuItem->Text = L"High score";
+			this->highScoreToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::highScoreToolStripMenuItem_Click);
 			// 
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(140, 22);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::closeToolStripMenuItem_Click);
 			// 
@@ -178,6 +189,7 @@ namespace MemoryGame {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
 			this->Name = L"MainForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -221,6 +233,10 @@ namespace MemoryGame {
 	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		AboutForm^ aboutForm = gcnew AboutForm();
 		aboutForm->Show();
+	}
+	private: System::Void highScoreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+		HighScoreForm^ highScoreForm = gcnew HighScoreForm();
+		highScoreForm->Show();
 	}
 };
 }

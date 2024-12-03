@@ -126,4 +126,81 @@
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>75</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAACMuAAAjLgAAAAAAAAAA
+        AAD///////////////////////////////////////////////////////////////////////7+///9
+        /f///Pz///z8///9/f///v7/////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////f3///f4///y
+        8v//7u///+zt///r7P//6+z//+zt///u7///8vL///f4///9/f//////////////////////////////
+        /////////////////////////////////////////////////////////////////////Pz///P0///s
+        7P//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+zs///z9P///Pz/////////
+        /////////////////////////////////////////////////////////////////////v7///b3///r
+        7P//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///r
+        7P//9vf///7+//////////////////////////////////////////////////////////////39///y
+        8v//6er//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///p6v//8vL///39///////////////////////////////////////////////////9
+        /f//8PH//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//8PH///39////////////////////////////////////
+        /////v7///Ly///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//8vL///7+////////////////////
+        ///////////////29v//6er//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///p6v//9vb/////////
+        /////////////////////Pz//+zs///o6f//6On//+jp///o6f//6On//+nq///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///p6v//6On//+jp///o6f//6On//+jp///s
+        7P///Pz////////////////////////z9P//6On//+jp///o6f//6On//+nq///k5f//3d7//+Pk///p
+        6v//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///p6v//5eb//93f///i5P//6er//+jp///o
+        6f//6On//+jp///z9P///////////////////P3//+zs///o6f//6On//+jp///o6f//ys3//pui//6O
+        lf/+maD//8jL///o6f//6On//+jp///o6f//6On//+jp///o6f//6er//9LV//6gpv/+jpX//pie///D
+        x///5+j//+jp///o6f//6On//+zt///8/f/////////////3+P//6On//+jp///o6f//6er//9PV//6L
+        k//+fob//n+H//5+hv/+iZD//83P///p6v//6On//+jp///o6f//6On//+nq///X2f/+kpn//n6G//5/
+        h//+fob//oaO///JzP//6er//+jp///o6f//6On///f4//////////////Lz///o6f//6On//+jp///p
+        6v/+tLj//n6G//6AiP/+gIj//oCI//5+h//+mqH//+Lj///r6v//6ur//+rq///r6///4eL//p+l//5/
+        h//+gIj//oCI//6AiP/+fob//qOp///n6P//6On//+jp///o6f//8vP////////+/v//7u///+jp///o
+        6f//6On//+nq//6rsP/+fob//oCI//6AiP/+gIj//oCI//6Bif//s7f//8/S///O0f//ztH//8/R//6r
+        sP/+gIj//oCI//6AiP/+gIj//oCI//5+hv/+n6X//+bn///o6f//6On//+jp///u7////v7///39///s
+        7f//6On//+jp///o6f//6er//rK3//5/h//+gIj//oCI//6AiP/+gIj//oCI//6Bif/+hIz//oSM//6E
+        jP/+hIz//oGJ//6AiP/+f4f//oCI//6AiP/+gIj//n+H//6xtf//6er//+jp///o6f//6On//+zt///9
+        /f///Pz//+vs///o6f//6On//+jp///q6///wMT//oCI//6AiP/+gIj//oCI//5/h//+gIj//oCI//6A
+        iP/+gIj//oCI//6AiP/+gIj//oKK//6Um//+hY3//oCI//6AiP/+gYn//8TH///q6///6On//+jp///o
+        6f//6+z///z8///8/P//6+z//+jp///o6f//6On//+rq///N0P/+g4v//oCI//5+hv/+k5r//7W6//6C
+        iv/+f4f//oCI//6AiP/+gIj//oCI//5+hv/+iJD//87R//6Um//+fYX//n+H//6Ij///1df//+nq///o
+        6f//6On//+jp///r7P///Pz///39///s7f//6On//+jp///o6f//6er//9ja//6Jkf/+gIj//oqS//6u
+        s///3+H//pSb//6Gjv/+gIj//oCI//6AiP/+f4f//pmf//6aoP/+iJD//ouS//6kqv/+g4r//pOa///g
+        4v//6On//+jp///o6f//6On//+zt///9/f///v7//+7v///o6f//6On//+jp///p6f//4OH//pKZ//6C
+        iv//yMv//+rr///29///4uT//qet//5+hv/+gIj//oCI//5/h//+r7T//q+0//58hP/+kZj//8TI//6G
+        jf/+pKn//+fo///o6f//6On//+jp///o6f//7u////7+////////8vP//+jp///o6f//6On//+jp///l
+        5//+nqT//n+H//6Kkv/+rrP//9/h//6Um//+ho7//oCI//6AiP/+gIj//oCI//6Bif/+h4///7W6//6O
+        lf/+gYn//n+H//+2u///6ur//+jp///o6f//6On//+jp///y8//////////////3+P//6On//+jp///o
+        6f//6On//+nq//+2u//+f4f//n6G//6Tmv//tbr//oKK//5/h//+f4f//n+H//5/h//+f4f//n+H//6H
+        jv//t7z//o6V//5/h//+hIv//8rN///p6v//6On//+jp///o6f//6On///f4//////////////z9///s
+        7P//6On//+jp///o6f//6er//9ze//6Ynv/+fob//n+H//5/h//+fob//oaO//6Xnv/+lpz//pSa//6V
+        nP/+h4///n6G//59hf/+fob//oGJ//6tsv//5eb//+jp///o6f//6On//+jp///s7f///P3/////////
+        //////////P0///o6f//6On//+jp///o6f//6er//9nb//6qr//+kZj//o6V//6do///x8r//+Pk///i
+        5P//4eP//+Lk///N0P/+qK7//puh//6hp///wMP//+Pl///p6f//6On//+jp///o6f//6On///P0////
+        /////////////////////Pz//+zs///o6f//6On//+jp///o6f//6er//+fo///f4f//3d///+Tm///p
+        6v//6On//+jp///o6f//6On//+nq///o6f//5eb//+bn///p6v//6On//+jp///o6f//6On//+jp///s
+        7P///Pz/////////////////////////////9vb//+nq///o6f//6On//+jp///o6f//6On//+nq///p
+        6v//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6er///b2///////////////////////////////////+/v//8vL//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///y8v///v7////////////////////////////////////////9/f//8PH//+jp///o
+        6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//8PH///39///////////////////////////////////////////////////9
+        /f//8vL//+nq///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6er///Ly///9/f//////////////////////////////////////////////
+        ///////////////+/v//9vf//+vs///o6f//6On//+jp///o6f//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+vs///29////v7/////////////////////////////////////////
+        /////////////////////////////////////Pz///P0///s7P//6On//+jp///o6f//6On//+jp///o
+        6f//6On//+jp///o6f//6On//+zs///z9P///Pz/////////////////////////////////////////
+        //////////////////////////////////////////////////////////39///3+P//8vL//+7v///s
+        7f//6+z//+vs///s7f//7u////Ly///3+P///f3/////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////
+        /////v7///39///8/P///Pz///39///+/v//////////////////////////////////////////////
+        ////////////////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+</value>
+  </data>
 </root>

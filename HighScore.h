@@ -7,18 +7,14 @@
 
 namespace MemoryGame
 {
-	struct PlayerScore {
-		std::string playerName;
-		std::string playerTime;
-	};
 	class HighScore
 	{
 		public:
 			void saveHighScore(Player* player);
 			void readHighScores();
-			std::vector<PlayerScore> getScores();
+			std::vector<Player> getPlayersScore();
 		private:
-			std::vector<PlayerScore> scores;
+			std::vector<Player> scores;
 	};
 }
 #endif

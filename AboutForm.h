@@ -52,6 +52,7 @@ namespace MemoryGame {
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::ToolStripMenuItem^ gameToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ closeToolStripMenuItem;
+	private: System::Windows::Forms::Label^ label13;
 
 	private:
 		/// <summary>
@@ -83,6 +84,7 @@ namespace MemoryGame {
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->label13 = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
@@ -262,12 +264,25 @@ namespace MemoryGame {
 			this->label12->TabIndex = 15;
 			this->label12->Text = L"Memory Game";
 			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(238)));
+			this->label13->ForeColor = System::Drawing::Color::White;
+			this->label13->Location = System::Drawing::Point(27, 638);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(246, 20);
+			this->label13->TabIndex = 16;
+			this->label13->Text = L"Kliknij \"Space\" aby zamkn¹æ okno";
+			// 
 			// AboutForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::MediumSlateBlue;
 			this->ClientSize = System::Drawing::Size(884, 689);
+			this->Controls->Add(this->label13);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->label11);
 			this->Controls->Add(this->label10);

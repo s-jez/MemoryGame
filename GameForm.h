@@ -317,7 +317,7 @@ namespace MemoryGame {
 			if (memoryGame->checkForEnd())
 			{
 				gameTimer->Stop();
-				MessageBox::Show("You have won the game in " + gcnew String(player->getPlayerFormattedTime().c_str()), "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				MessageBox::Show("Player " + gcnew String(player->getPlayerName().c_str()) + " won the game in " + gcnew String(player->getPlayerFormattedTime().c_str()), "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				highScore->saveHighScore(player);
 				this->Close();
 			}

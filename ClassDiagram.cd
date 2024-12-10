@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="MemoryGame::Player">
-    <Position X="2" Y="0.75" Width="3" />
+    <Position X="1" Y="1" Width="3" />
     <TypeIdentifier>
       <HashCode>EABAAQAAAAAAAAAAUAGEAAAAQAAAAAAAAAAAAQAAAAA=</HashCode>
       <FileName>Player.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MemoryGame::Memory">
-    <Position X="5.25" Y="0.75" Width="4" />
+    <Position X="4.75" Y="1" Width="4" />
     <TypeIdentifier>
       <HashCode>CAAKQAwAAAAAAAQABAhABEJACICgAASAIkAQQIAABAA=</HashCode>
       <FileName>Memory.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MemoryGame::Card">
-    <Position X="9.5" Y="0.75" Width="2" />
+    <Position X="9.5" Y="1" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AABABAAAAAAAACAAAAAAARAAAAAAAiAAAAAAAAAAAAA=</HashCode>
       <FileName>Card.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MemoryGame::HighScore">
-    <Position X="2" Y="4" Width="3" />
+    <Position X="1" Y="4.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAIgAAAAAAAAAAAAACAAAAAAEA=</HashCode>
       <FileName>HighScore.h</FileName>

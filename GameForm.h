@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Memory.h"
-#include "Player.h"
-#include "HighScore.h"
 #include "AboutForm.h"
 #include "HighScoreForm.h"
 #include <random>
@@ -28,19 +26,11 @@ namespace MemoryGame {
 	{
 	private:
 		Memory* memoryGame = new Memory(4, 4);
-		Player* player = new Player();
-		HighScore* highScore = new HighScore();
 		array<PictureBox^, 2>^ pictureBoxBoard;
 
-
-	private: System::Windows::Forms::Label^ playerTimeLabel;
-
-
-	private: System::Windows::Forms::Timer^ gameTimer;
+	private: System::Windows::Forms::Label^ playerStepLabel;
 	private: System::Windows::Forms::ToolStripMenuItem^ aboutGameToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ highScoreToolStripMenuItem;
-
-
 	private: System::Windows::Forms::Panel^ panel1;
 
 	public:
@@ -48,9 +38,8 @@ namespace MemoryGame {
 		{
 			InitializeComponent();
 			initializeBoard();
-			player->setPlayerName(marshal_as<std::string>(playerName));
-			String^ playerNameLbl = gcnew String(player->getPlayerName().c_str());
-			label1->Text = playerNameLbl;
+			memoryGame->getPlayer()->setPlayerName(marshal_as<std::string>(playerName));
+			label1->Text = gcnew String(memoryGame->getPlayer()->getPlayerName().c_str());
 		}
 
 	protected:
@@ -62,6 +51,10 @@ namespace MemoryGame {
 			if (components)
 			{
 				delete components;
+			}
+			if (memoryGame)
+			{
+				delete memoryGame;
 			}
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
@@ -93,7 +86,6 @@ namespace MemoryGame {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(GameForm::typeid));
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->appToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -103,8 +95,7 @@ namespace MemoryGame {
 			this->playerNameLbl = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
-			this->playerTimeLabel = (gcnew System::Windows::Forms::Label());
-			this->gameTimer = (gcnew System::Windows::Forms::Timer(this->components));
+			this->playerStepLabel = (gcnew System::Windows::Forms::Label());
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
 			// 
@@ -166,7 +157,7 @@ namespace MemoryGame {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(25, 38);
+			this->label1->Location = System::Drawing::Point(25, 47);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(62, 24);
 			this->label1->TabIndex = 21;
@@ -179,22 +170,16 @@ namespace MemoryGame {
 			this->panel1->Size = System::Drawing::Size(537, 577);
 			this->panel1->TabIndex = 22;
 			// 
-			// playerTimeLabel
+			// playerStepLabel
 			// 
-			this->playerTimeLabel->AutoSize = true;
-			this->playerTimeLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
+			this->playerStepLabel->AutoSize = true;
+			this->playerStepLabel->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Regular,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(238)));
-			this->playerTimeLabel->ForeColor = System::Drawing::Color::White;
-			this->playerTimeLabel->Location = System::Drawing::Point(592, 59);
-			this->playerTimeLabel->Name = L"playerTimeLabel";
-			this->playerTimeLabel->Size = System::Drawing::Size(0, 24);
-			this->playerTimeLabel->TabIndex = 23;
-			// 
-			// gameTimer
-			// 
-			this->gameTimer->Enabled = true;
-			this->gameTimer->Interval = 1000;
-			this->gameTimer->Tick += gcnew System::EventHandler(this, &GameForm::GameTimer);
+			this->playerStepLabel->ForeColor = System::Drawing::Color::White;
+			this->playerStepLabel->Location = System::Drawing::Point(593, 47);
+			this->playerStepLabel->Name = L"playerStepLabel";
+			this->playerStepLabel->Size = System::Drawing::Size(0, 24);
+			this->playerStepLabel->TabIndex = 23;
 			// 
 			// GameForm
 			// 
@@ -204,7 +189,7 @@ namespace MemoryGame {
 			this->BackColor = System::Drawing::Color::MediumSlateBlue;
 			this->ClientSize = System::Drawing::Size(884, 689);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->playerTimeLabel);
+			this->Controls->Add(this->playerStepLabel);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->playerNameLbl);
 			this->Controls->Add(this->menuStrip1);
@@ -222,7 +207,7 @@ namespace MemoryGame {
 #pragma endregion
     private: System::Void GameForm_Load(System::Object^ sender, System::EventArgs^ e) 
     {
-     }
+    }
 	private: System::Void closeToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
 	{
 		Application::Exit();
@@ -232,11 +217,11 @@ namespace MemoryGame {
 	}
 	private: void initializeBoard() 
 	{
-		pictureBoxBoard = gcnew array<PictureBox^, 2>(memoryGame->rows, memoryGame->cols);
+		pictureBoxBoard = gcnew array<PictureBox^, 2>(memoryGame->getRows(), memoryGame->getCols());
 		int pbWidth = 120, pbHeight = 140, pbPadding = 10;
-		for (int row = 0; row < memoryGame->rows; row++) 
+		for (int row = 0; row < memoryGame->getRows(); row++) 
 		{
-			for (int col = 0; col < memoryGame->cols; col++) 
+			for (int col = 0; col < memoryGame->getCols(); col++) 
 			{
 				PictureBox^ pictureBox = gcnew PictureBox();
 				pictureBox->Size = System::Drawing::Size(pbWidth, pbHeight);
@@ -245,7 +230,7 @@ namespace MemoryGame {
 				pictureBox->BackColor = Color::LightBlue;
 				pictureBox->Cursor = Cursors::Hand;
 				pictureBox->SizeMode = PictureBoxSizeMode::StretchImage;
-				std::string cardPath = "images/card" + memoryGame->getCardValue(row, col) + ".png";
+				std::string cardPath = "images/card" + memoryGame->getCard(row, col).getValue() + ".png";
 				pictureBox->Image = Image::FromFile(marshal_as<System::String^>(cardPath));
 				pictureBox->Click += gcnew EventHandler(this, &GameForm::Card_Click);
 				this->panel1->Controls->Add(pictureBox);
@@ -253,7 +238,6 @@ namespace MemoryGame {
 			}
 		}
 		Task::Delay(5000)->ContinueWith(gcnew Action<Task^>(this, &GameForm::CoverAllCards));
-		gameTimer->Start();
 	}
 	void Card_Click(System::Object^ sender, System::EventArgs^ e)
 	{
@@ -267,9 +251,9 @@ namespace MemoryGame {
 			{
 				if (pictureBoxBoard[i, j] == clickedPictureBox)
 				{
-					if (memoryGame->board[i][j].isRevelead() == false) 
+					if (memoryGame->getCard(i, j).isRevelead() == false)
 					{
-						memoryGame->board[i][j].reveal();
+						memoryGame->getCard(i, j).reveal();
 						ShowPictureBox(i, j);
 						bool firstCardSelected = memoryGame->getFirstSelectedCardRow() == -1 && memoryGame->getFirstSelectedCardCol() == -1;
 						if (firstCardSelected)
@@ -292,8 +276,8 @@ namespace MemoryGame {
 	}
 	void ShowPictureBox(int row, int col) 
 	{
-		String^ cardValue = gcnew String(memoryGame->board[row][col].getValue().c_str());
-		if (memoryGame->board[row][col].isRevelead() == true)
+		String^ cardValue = gcnew String(memoryGame->getCard(row, col).getValue().c_str());
+		if (memoryGame->getCard(row, col).isRevelead() == true)
 		{
 			pictureBoxBoard[row, col]->Image = Image::FromFile("images/card" + cardValue + ".png");
 		}
@@ -304,11 +288,19 @@ namespace MemoryGame {
 	}
 	void HandleSecondCard(Task ^t)
 	{
+		if (this->InvokeRequired)
+		{
+			this->Invoke(gcnew Action<Task^>(this, &GameForm::HandleSecondCard), t);
+			return;
+		}
 		int firstSelectedRow = memoryGame->getFirstSelectedCardRow();
 		int firstSelectedCol = memoryGame->getFirstSelectedCardCol();
 		int secondSelectedRow = memoryGame->getSecondSelectedCardRow();
 		int secondSelectedCol = memoryGame->getSecondSelectedCardCol();
 
+		int step = memoryGame->getPlayer()->getPlayerStep() + 1;
+		memoryGame->getPlayer()->setPlayerStep(step);
+		playerStepLabel->Text = "Step " + memoryGame->getPlayer()->getPlayerStep().ToString();
 		bool isMatched = memoryGame->CheckForMatch(firstSelectedRow, firstSelectedCol, secondSelectedRow, secondSelectedCol);
 		if (isMatched)
 		{
@@ -316,9 +308,7 @@ namespace MemoryGame {
 			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->Visible = false;	
 			if (memoryGame->checkForEnd())
 			{
-				gameTimer->Stop();
-				MessageBox::Show("Player " + gcnew String(player->getPlayerName().c_str()) + " won the game in " + gcnew String(player->getPlayerFormattedTime().c_str()), "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
-				highScore->saveHighScore(player);
+				MessageBox::Show(gcnew String(memoryGame->getPlayer()->getPlayerName().c_str()) + " won the game in " + memoryGame->getPlayer()->getPlayerStep() + " steps", "Memory Game", MessageBoxButtons::OK, MessageBoxIcon::Information);
 				this->Close();
 			}
 		}
@@ -328,29 +318,23 @@ namespace MemoryGame {
 			pictureBoxBoard[firstSelectedRow, firstSelectedCol]->BackColor = Color::LightBlue;
 			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->Image = nullptr;
 			pictureBoxBoard[secondSelectedRow, secondSelectedCol]->BackColor = Color::LightBlue;
-			memoryGame->board[firstSelectedRow][firstSelectedCol].hide();
-			memoryGame->board[secondSelectedRow][secondSelectedCol].hide();
+			memoryGame->getCard(firstSelectedRow, firstSelectedCol).hide();
+			memoryGame->getCard(secondSelectedRow, secondSelectedCol).hide();
 		}
 		memoryGame->resetSelectedCards();
 		memoryGame->setProcessingClick(false);
 	}
 	void CoverAllCards(Task^ t)
 	{
-		for (int i = 0; i < memoryGame->rows; i++)
+		for (int i = 0; i < memoryGame->getRows(); i++)
 		{
-			for (int j = 0; j < memoryGame->cols; j++)
+			for (int j = 0; j < memoryGame->getCols(); j++)
 			{
 				pictureBoxBoard[i, j]->Image = nullptr;
 				pictureBoxBoard[i, j]->BackColor = Color::LightBlue;
 			}
 		}
 		memoryGame->setIsStarted(true);
-	}
-	private: System::Void GameTimer(System::Object^ sender, System::EventArgs^ e) 
-	{
-		if (memoryGame->getIsStarted() == false) return;
-		player->incrementTime();
-		playerTimeLabel->Text = "Your time: " + gcnew String(player->getPlayerFormattedTime().c_str());
 	}
 	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 		AboutForm^ aboutForm = gcnew AboutForm();

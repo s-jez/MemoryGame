@@ -1,7 +1,7 @@
 #pragma once
 #include "AboutForm.h"
 #include "HighScore.h"
-#include "Player.h"
+
 namespace MemoryGame {
 
 	using namespace System;
@@ -35,6 +35,10 @@ namespace MemoryGame {
 			{
 				delete components;
 			}
+			if (highScore)
+			{
+				delete highScore;
+			}
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 	protected:
@@ -43,6 +47,7 @@ namespace MemoryGame {
 	private: System::Windows::Forms::ToolStripMenuItem^ closeToolStripMenuItem;
 	private: System::Windows::Forms::DataGridView^ highScoreGridView;
 	private: System::Windows::Forms::Label^ label1;
+
 
 	private:
 		/// <summary>
@@ -116,7 +121,6 @@ namespace MemoryGame {
 			this->highScoreGridView->RowHeadersWidthSizeMode = System::Windows::Forms::DataGridViewRowHeadersWidthSizeMode::DisableResizing;
 			this->highScoreGridView->Size = System::Drawing::Size(478, 463);
 			this->highScoreGridView->TabIndex = 1;
-			this->highScoreGridView->CellContentClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &HighScoreForm::highScoreGridView_CellContentClick);
 			// 
 			// label1
 			// 
@@ -170,10 +174,10 @@ namespace MemoryGame {
 			highScoreGridView->ColumnHeadersHeight = 30;
 
 			dt->Columns->Add("Player Name");
-			dt->Columns->Add("Player Time");
+			dt->Columns->Add("Player Step");
 
 			for (int i = 0; i < scores.size(); i++) {
-				dt->Rows->Add(gcnew cli::array<System::String^> { gcnew String(scores[i].getPlayerName().c_str()), gcnew String(scores[i].getPlayerFormattedTime().c_str()) });
+				dt->Rows->Add(gcnew cli::array<String^> { gcnew String(scores[i].getPlayerName().c_str()), scores[i].getPlayerStep().ToString() });
 			}
 			highScoreGridView->DataSource = dt;
 		}
@@ -182,7 +186,5 @@ namespace MemoryGame {
 			this->Close();
 		}
 	}
-private: System::Void highScoreGridView_CellContentClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) {
-}
 };
 }

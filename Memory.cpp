@@ -16,7 +16,16 @@ namespace MemoryGame
 		isProcessingClick = false;
 		firstSelectedCardRow = -1;
 		firstSelectedCardCol = -1;
+		highScore = new HighScore();
 		createBoardWithCards();
+	}
+	int Memory::getRows()
+	{
+		return rows;
+	}
+	int Memory::getCols()
+	{
+		return cols;
 	}
 	bool Memory::getIsStarted() 
 	{
@@ -26,9 +35,9 @@ namespace MemoryGame
 	{
 		this->isStarted = isStarted;
 	}
-	std::string Memory::getCardValue(int row, int col)
+	Card& Memory::getCard(int row, int col)
 	{
-		return board[row][col].getValue();
+		return board[row][col];
 	}
 	bool Memory::CheckForMatch(int row1, int col1, int row2, int col2)
 	{
@@ -40,6 +49,8 @@ namespace MemoryGame
 	}
 	void Memory::createBoardWithCards()
 	{
+		std::vector<Card> cards;
+		player = new Player();
 		for (int i = 1; i <= (rows * cols) / 2; i++) {
 			cards.push_back(Card(std::to_string(i)));
 			cards.push_back(Card(std::to_string(i)));
@@ -69,6 +80,7 @@ namespace MemoryGame
 				}
 			}
 		}
+		highScore->saveHighScore(player);
 		return true;
 	}
 	int Memory::getFirstSelectedCardRow()
@@ -115,6 +127,14 @@ namespace MemoryGame
 	{
 		firstSelectedCardRow = -1;
 		firstSelectedCardCol = -1;
+	}
+	Player* Memory::getPlayer()
+	{
+		return player;
+	}
+	HighScore* Memory::getHighScore()
+	{
+		return highScore;
 	}
 }
 

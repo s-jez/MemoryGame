@@ -1,4 +1,4 @@
-Stanislaw 0:21
-Jan 0:16
-Adam 0:20
-Jan 0:20
+JanKowalski 17
+Player1 14
+Adam 18
+Player1 12

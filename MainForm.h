@@ -162,7 +162,7 @@ namespace MemoryGame {
 			this->playerBox->Name = L"playerBox";
 			this->playerBox->Size = System::Drawing::Size(261, 30);
 			this->playerBox->TabIndex = 3;
-			this->playerBox->Text = L"Player 1";
+			this->playerBox->Text = L"Player1";
 			this->playerBox->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &MainForm::playerBox_KeyDown);
 			// 
 			// label2
@@ -227,7 +227,7 @@ namespace MemoryGame {
 			playerBox->Text = "";
 			return;
 		}
-		GameForm^ gameForm = gcnew GameForm(playerBox->Text);
+		GameForm^ gameForm = gcnew GameForm(playerBox->Text->Replace(" ", ""));
 		gameForm->Show();
 		playerBox->Text = "";
 	}

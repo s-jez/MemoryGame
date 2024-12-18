@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 #include "Card.h"
-
+#include "Player.h"
+#include "HighScore.h"
 
 namespace MemoryGame 
 {
@@ -12,10 +13,13 @@ namespace MemoryGame
 	{
 		public:
 			Memory(int rows, int cols);
-			int rows, cols;
-			std::vector<std::vector<Card>> board;
+			int getRows();
+			int getCols();
 
-			std::string getCardValue(int row, int col);
+			Card& getCard(int row, int col);
+			Player* getPlayer();
+			HighScore* getHighScore();
+
 			bool CheckForMatch(int row1, int col1, int row2, int col2);
 			bool getIsStarted();
 			void setIsStarted(bool isStarted);
@@ -34,7 +38,10 @@ namespace MemoryGame
 			void setSecondSelectedCardCol(int col);
 			void resetSelectedCards();
 		private:
-			std::vector<Card> cards;
+			Player* player;
+			HighScore* highScore;
+			std::vector<std::vector<Card>> board;
+			int rows, cols;
 			int firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
 			bool isProcessingClick, isStarted;
 			void createBoardWithCards();

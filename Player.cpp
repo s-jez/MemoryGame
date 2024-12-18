@@ -4,20 +4,8 @@ namespace MemoryGame
 {
 	Player::Player()
 	{
-		playerTime = 0;
+		step = 0;
 		playerName = "";
-	}
-	int Player::getPlayerTime()
-	{
-		return playerTime;
-	}
-	void Player::setPlayerTime(int time)
-	{
-		this->playerTime = time;
-	}
-	void Player::incrementTime()
-	{
-		playerTime++;
 	}
 	std::string Player::getPlayerName()
 	{
@@ -27,16 +15,12 @@ namespace MemoryGame
 	{
 		this->playerName = pName;
 	}
-	std::string Player::getPlayerFormattedTime()
+	int Player::getPlayerStep()
 	{
-		int minutes = playerTime / 60;
-		int seconds = playerTime % 60;
-		return std::to_string(minutes) + ":" + (seconds < 10 ? "0" : "") + std::to_string(seconds);
+		return step;
 	}
-	int Player::convertTimeToSeconds(std::string fTime)
+	void Player::setPlayerStep(int step)
 	{
-		int minutes = std::stoi(fTime.substr(0, fTime.find(":")));
-		int seconds = std::stoi(fTime.substr(fTime.find(":") + 1));
-		return minutes * 60 + seconds;
+		this->step = step;
 	}
 }

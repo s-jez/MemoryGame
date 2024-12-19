@@ -1,4 +1,5 @@
-JanKowalski 17
+Jan 17
 Player1 14
 Adam 18
-Player1 12
+Stanislaw 12
+Piotr 17

@@ -336,11 +336,13 @@ namespace MemoryGame {
 		}
 		memoryGame->setIsStarted(true);
 	}
-	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void aboutGameToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
 		AboutForm^ aboutForm = gcnew AboutForm();
 		aboutForm->Show();
 	}
-	private: System::Void highScoreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void highScoreToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
 		HighScoreForm^ highScoreForm = gcnew HighScoreForm();
 		highScoreForm->Show();
 	}

@@ -7,7 +7,8 @@ namespace MemoryGame
 	void HighScore::saveHighScore(Player* player)
 	{
 		std::ofstream outFile("highscores.txt", std::ios::app);
-		if (!outFile) {
+		if (!outFile) 
+		{
 			throw std::runtime_error("Could not open file");
 		}
 		if (player->getPlayerName() != "") {
@@ -18,12 +19,14 @@ namespace MemoryGame
 	void HighScore::readHighScores()
 	{
 		std::ifstream inFile("highscores.txt", std::ios::in);
-		if (!inFile) {
+		if (!inFile) 
+		{
 			throw std::runtime_error("Could not open file");
 		}
 		std::string playerName;
 		int step;
-		while (inFile >> playerName >> step) {
+		while (inFile >> playerName >> step) 
+		{
 			Player player;
 			player.setPlayerName(playerName);
 			player.setPlayerStep(step);
@@ -33,9 +36,12 @@ namespace MemoryGame
 	}
 	std::vector<Player> HighScore::getPlayersScore()
 	{
-		for (int i = 0; i < scores.size(); i++) {
-			for (int j = i + 1; j < scores.size(); j++) {
-				if (scores[i].getPlayerStep() > scores[j].getPlayerStep()) {
+		for (int i = 0; i < scores.size(); i++) 
+		{
+			for (int j = i + 1; j < scores.size(); j++) 
+			{
+				if (scores[i].getPlayerStep() > scores[j].getPlayerStep()) 
+				{
 					Player temp = scores[i];
 					scores[i] = scores[j];
 					scores[j] = temp;

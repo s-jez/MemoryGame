@@ -1,6 +1,7 @@
 #pragma once
 #include "AboutForm.h"
 #include "HighScore.h"
+#include "Player.h"
 
 namespace MemoryGame {
 
@@ -167,14 +168,14 @@ namespace MemoryGame {
 	private: System::Void HighScoreForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		try {
 			highScore->readHighScores();
-			auto scores = highScore->getPlayersScore();
+			std::vector<Player> scores = highScore->getPlayersScore();
 
 			DataTable^ dt = gcnew DataTable();
 			highScoreGridView->RowTemplate->Height = 30;
 			highScoreGridView->ColumnHeadersHeight = 30;
 
 			dt->Columns->Add("Player Name");
-			dt->Columns->Add("Player Step");
+			dt->Columns->Add("Player Steps");
 
 			for (int i = 0; i < scores.size(); i++) {
 				dt->Rows->Add(gcnew cli::array<String^> { gcnew String(scores[i].getPlayerName().c_str()), scores[i].getPlayerStep().ToString() });

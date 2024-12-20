@@ -91,10 +91,11 @@ namespace MemoryGame {
 			// 
 			// menuStrip1
 			// 
+			this->menuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->gameToolStripMenuItem });
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(884, 24);
+			this->menuStrip1->Size = System::Drawing::Size(1179, 28);
 			this->menuStrip1->TabIndex = 2;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
@@ -102,13 +103,13 @@ namespace MemoryGame {
 			// 
 			this->gameToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->closeToolStripMenuItem });
 			this->gameToolStripMenuItem->Name = L"gameToolStripMenuItem";
-			this->gameToolStripMenuItem->Size = System::Drawing::Size(50, 20);
+			this->gameToolStripMenuItem->Size = System::Drawing::Size(62, 24);
 			this->gameToolStripMenuItem->Text = L"Game";
 			// 
 			// closeToolStripMenuItem
 			// 
 			this->closeToolStripMenuItem->Name = L"closeToolStripMenuItem";
-			this->closeToolStripMenuItem->Size = System::Drawing::Size(103, 22);
+			this->closeToolStripMenuItem->Size = System::Drawing::Size(128, 26);
 			this->closeToolStripMenuItem->Text = L"Close";
 			this->closeToolStripMenuItem->Click += gcnew System::EventHandler(this, &AboutForm::closeToolStripMenuItem_Click);
 			// 
@@ -116,9 +117,10 @@ namespace MemoryGame {
 			// 
 			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
 			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Zoom;
-			this->pictureBox1->Location = System::Drawing::Point(460, 58);
+			this->pictureBox1->Location = System::Drawing::Point(613, 71);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(400, 600);
+			this->pictureBox1->Size = System::Drawing::Size(533, 738);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::CenterImage;
 			this->pictureBox1->TabIndex = 3;
 			this->pictureBox1->TabStop = false;
@@ -129,9 +131,10 @@ namespace MemoryGame {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label1->ForeColor = System::Drawing::Color::White;
-			this->label1->Location = System::Drawing::Point(27, 227);
+			this->label1->Location = System::Drawing::Point(36, 279);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(130, 20);
+			this->label1->Size = System::Drawing::Size(158, 25);
 			this->label1->TabIndex = 4;
 			this->label1->Text = L"Imiê i nazwisko";
 			// 
@@ -140,9 +143,10 @@ namespace MemoryGame {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label2->ForeColor = System::Drawing::Color::White;
-			this->label2->Location = System::Drawing::Point(27, 247);
+			this->label2->Location = System::Drawing::Point(36, 304);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(107, 20);
+			this->label2->Size = System::Drawing::Size(133, 25);
 			this->label2->TabIndex = 5;
 			this->label2->Text = L"Stanis³aw Je¿";
 			// 
@@ -152,9 +156,10 @@ namespace MemoryGame {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label3->ForeColor = System::Drawing::Color::White;
-			this->label3->Location = System::Drawing::Point(27, 280);
+			this->label3->Location = System::Drawing::Point(36, 345);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(79, 20);
+			this->label3->Size = System::Drawing::Size(98, 25);
 			this->label3->TabIndex = 6;
 			this->label3->Text = L"Kierunek";
 			// 
@@ -164,9 +169,10 @@ namespace MemoryGame {
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label4->ForeColor = System::Drawing::Color::White;
-			this->label4->Location = System::Drawing::Point(27, 300);
+			this->label4->Location = System::Drawing::Point(36, 369);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(93, 20);
+			this->label4->Size = System::Drawing::Size(113, 25);
 			this->label4->TabIndex = 7;
 			this->label4->Text = L"Informatyka";
 			// 
@@ -176,9 +182,10 @@ namespace MemoryGame {
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label5->ForeColor = System::Drawing::Color::White;
-			this->label5->Location = System::Drawing::Point(27, 329);
+			this->label5->Location = System::Drawing::Point(36, 405);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(76, 20);
+			this->label5->Size = System::Drawing::Size(92, 25);
 			this->label5->TabIndex = 8;
 			this->label5->Text = L"Semestr";
 			// 
@@ -187,9 +194,10 @@ namespace MemoryGame {
 			this->label6->AutoSize = true;
 			this->label6->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label6->ForeColor = System::Drawing::Color::White;
-			this->label6->Location = System::Drawing::Point(27, 349);
+			this->label6->Location = System::Drawing::Point(36, 430);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(24, 20);
+			this->label6->Size = System::Drawing::Size(27, 25);
 			this->label6->TabIndex = 9;
 			this->label6->Text = L"III";
 			// 
@@ -199,9 +207,10 @@ namespace MemoryGame {
 			this->label7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label7->ForeColor = System::Drawing::Color::White;
-			this->label7->Location = System::Drawing::Point(109, 329);
+			this->label7->Location = System::Drawing::Point(145, 405);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(59, 20);
+			this->label7->Size = System::Drawing::Size(71, 25);
 			this->label7->TabIndex = 10;
 			this->label7->Text = L"Grupa";
 			// 
@@ -211,9 +220,10 @@ namespace MemoryGame {
 			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label8->ForeColor = System::Drawing::Color::White;
-			this->label8->Location = System::Drawing::Point(109, 349);
+			this->label8->Location = System::Drawing::Point(145, 430);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(14, 20);
+			this->label8->Size = System::Drawing::Size(17, 25);
 			this->label8->TabIndex = 11;
 			this->label8->Text = L"I";
 			// 
@@ -223,9 +233,10 @@ namespace MemoryGame {
 			this->label9->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label9->ForeColor = System::Drawing::Color::White;
-			this->label9->Location = System::Drawing::Point(27, 379);
+			this->label9->Location = System::Drawing::Point(36, 466);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(135, 20);
+			this->label9->Size = System::Drawing::Size(163, 25);
 			this->label9->TabIndex = 12;
 			this->label9->Text = L"Rok akademicki";
 			// 
@@ -234,9 +245,10 @@ namespace MemoryGame {
 			this->label10->AutoSize = true;
 			this->label10->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->label10->ForeColor = System::Drawing::Color::White;
-			this->label10->Location = System::Drawing::Point(27, 399);
+			this->label10->Location = System::Drawing::Point(36, 491);
+			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(85, 20);
+			this->label10->Size = System::Drawing::Size(106, 25);
 			this->label10->TabIndex = 13;
 			this->label10->Text = L"2024/2025";
 			// 
@@ -246,9 +258,10 @@ namespace MemoryGame {
 			this->label11->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label11->ForeColor = System::Drawing::Color::White;
-			this->label11->Location = System::Drawing::Point(27, 429);
+			this->label11->Location = System::Drawing::Point(36, 528);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(206, 20);
+			this->label11->Size = System::Drawing::Size(252, 25);
 			this->label11->TabIndex = 14;
 			this->label11->Text = L"Politechnika Koszaliñska";
 			// 
@@ -258,9 +271,10 @@ namespace MemoryGame {
 			this->label12->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label12->ForeColor = System::Drawing::Color::White;
-			this->label12->Location = System::Drawing::Point(24, 172);
+			this->label12->Location = System::Drawing::Point(32, 212);
+			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(238, 37);
+			this->label12->Size = System::Drawing::Size(294, 46);
 			this->label12->TabIndex = 15;
 			this->label12->Text = L"Memory Game";
 			// 
@@ -270,18 +284,19 @@ namespace MemoryGame {
 			this->label13->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(238)));
 			this->label13->ForeColor = System::Drawing::Color::White;
-			this->label13->Location = System::Drawing::Point(27, 638);
+			this->label13->Location = System::Drawing::Point(36, 785);
+			this->label13->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(246, 20);
+			this->label13->Size = System::Drawing::Size(308, 25);
 			this->label13->TabIndex = 16;
 			this->label13->Text = L"Kliknij \"Space\" aby zamkn¹æ okno";
 			// 
 			// AboutForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::MediumSlateBlue;
-			this->ClientSize = System::Drawing::Size(884, 689);
+			this->ClientSize = System::Drawing::Size(1179, 848);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->label11);
@@ -297,7 +312,9 @@ namespace MemoryGame {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->menuStrip1);
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"AboutForm";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Memory Game - About";

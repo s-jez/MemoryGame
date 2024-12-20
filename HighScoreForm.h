@@ -1,7 +1,7 @@
 #pragma once
 #include "AboutForm.h"
-#include "HighScore.h"
 #include "Player.h"
+#include "Memory.h"
 
 namespace MemoryGame {
 
@@ -18,7 +18,7 @@ namespace MemoryGame {
 	public ref class HighScoreForm : public System::Windows::Forms::Form
 	{
 	private:
-		HighScore* highScore = new HighScore();
+		Memory* memoryGame = new Memory(4, 4);
 
 	public:
 		HighScoreForm(void)
@@ -36,9 +36,9 @@ namespace MemoryGame {
 			{
 				delete components;
 			}
-			if (highScore)
+			if (memoryGame)
 			{
-				delete highScore;
+				delete memoryGame;
 			}
 		}
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
@@ -167,8 +167,8 @@ namespace MemoryGame {
 	}
 	private: System::Void HighScoreForm_Load(System::Object^ sender, System::EventArgs^ e) {
 		try {
-			highScore->readHighScores();
-			std::vector<Player> scores = highScore->getPlayersScore();
+			memoryGame->getHighScore()->readHighScores();
+			std::vector<Player> scores = memoryGame->getHighScore()->getPlayersScore();
 
 			DataTable^ dt = gcnew DataTable();
 			highScoreGridView->RowTemplate->Height = 30;

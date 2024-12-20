@@ -217,6 +217,7 @@ namespace MemoryGame {
 	}
 	private: void initializeBoard() 
 	{
+		memoryGame->createBoardWithCards();
 		pictureBoxBoard = gcnew array<PictureBox^, 2>(memoryGame->getRows(), memoryGame->getCols());
 		int pbWidth = 120, pbHeight = 140, pbPadding = 10;
 		for (int row = 0; row < memoryGame->getRows(); row++) 

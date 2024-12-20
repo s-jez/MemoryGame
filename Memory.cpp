@@ -17,7 +17,6 @@ namespace MemoryGame
 		firstSelectedCardRow = -1;
 		firstSelectedCardCol = -1;
 		highScore = new HighScore();
-		createBoardWithCards();
 	}
 	int Memory::getRows()
 	{

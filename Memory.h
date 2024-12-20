@@ -20,6 +20,7 @@ namespace MemoryGame
 			Player* getPlayer();
 			HighScore* getHighScore();
 
+			void createBoardWithCards();
 			bool CheckForMatch(int row1, int col1, int row2, int col2);
 			bool getIsStarted();
 			void setIsStarted(bool isStarted);
@@ -44,7 +45,6 @@ namespace MemoryGame
 			int rows, cols;
 			int firstSelectedCardRow, firstSelectedCardCol, secondSelectedCardRow, secondSelectedCardCol;
 			bool isProcessingClick, isStarted;
-			void createBoardWithCards();
 	};
 }
 #endif
